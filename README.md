@@ -8,3 +8,7 @@
 [![SensioLabsInsight](https://insight.sensiolabs.com/projects/15919ee3-2cac-4e59-b54d-d79afbcf293c/small.png)](https://insight.sensiolabs.com/projects/15919ee3-2cac-4e59-b54d-d79afbcf293c)
 
 Configuration management. 
+
+## Provided Plugin Functions
+
+* `{{ configuration_get("key", "scope", "default value") }}`: Get a configuration value by it's key and scope. Optionally you can provide a default value.
