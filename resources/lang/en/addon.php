@@ -3,5 +3,5 @@
 return [
     'title'       => 'Configuration',
     'name'        => 'Configuration Module',
-    'description' => 'Addon configuration management.'
+    'description' => 'Addon configuration management.',
 ];

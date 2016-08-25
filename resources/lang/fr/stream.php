@@ -2,6 +2,6 @@
 
 return [
     'configuration' => [
-        'name' => 'Configuration'
-    ]
+        'name' => 'Configuration',
+    ],
 ];

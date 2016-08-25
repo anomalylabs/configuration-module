@@ -8,7 +8,6 @@ use Anomaly\Streams\Platform\Ui\Form\FormBuilder;
  * @link          http://pyrocms.com/
  * @author        PyroCMS, Inc. <support@pyrocms.com>
  * @author        Ryan Thompson <ryan@pyrocms.com>
- * @package       Anomaly\ConfigurationModule\Configuration\Form
  */
 class ConfigurationFormBuilder extends FormBuilder
 {
@@ -40,7 +39,7 @@ class ConfigurationFormBuilder extends FormBuilder
      * @var string
      */
     protected $actions = [
-        'save'
+        'save',
     ];
 
     /**
@@ -49,7 +48,7 @@ class ConfigurationFormBuilder extends FormBuilder
      * @var string
      */
     protected $buttons = [
-        'cancel'
+        'cancel',
     ];
 
     /**

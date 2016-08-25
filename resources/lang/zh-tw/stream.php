@@ -2,6 +2,6 @@
 
 return [
     'configuration' => [
-        'name' => '設定'
-    ]
+        'name' => '設定',
+    ],
 ];

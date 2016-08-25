@@ -13,7 +13,6 @@ use Illuminate\Config\Repository;
  * @link          http://pyrocms.com/
  * @author        PyroCMS, Inc. <support@pyrocms.com>
  * @author        Ryan Thompson <ryan@pyrocms.com>
- * @package       Anomaly\ConfigurationModule\ConfigurationInterface
  */
 class ConfigurationRepository extends EntryRepository implements ConfigurationRepositoryInterface
 {
@@ -78,9 +77,9 @@ class ConfigurationRepository extends EntryRepository implements ConfigurationRe
     /**
      * Get a configuration value.
      *
-     * @param      $key
-     * @param      $scope
-     * @param null $default
+     * @param             $key
+     * @param             $scope
+     * @param  null       $default
      * @return mixed|null
      */
     public function value($key, $scope, $default = null)

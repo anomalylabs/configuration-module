@@ -13,7 +13,6 @@ use Illuminate\Container\Container;
  * @link          http://pyrocms.com/
  * @author        PyroCMS, Inc. <support@pyrocms.com>
  * @author        Ryan Thompson <ryan@pyrocms.com>
- * @package       Anomaly\ConfigurationModule\Configuration\Form
  */
 class ConfigurationFormRepository implements FormRepositoryInterface
 {
@@ -70,7 +69,7 @@ class ConfigurationFormRepository implements FormRepositoryInterface
     /**
      * Save the form.
      *
-     * @param FormBuilder|ConfigurationFormBuilder $builder
+     * @param  FormBuilder|ConfigurationFormBuilder $builder
      * @return bool|mixed
      */
     public function save(FormBuilder $builder)

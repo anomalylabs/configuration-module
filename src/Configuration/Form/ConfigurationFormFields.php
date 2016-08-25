@@ -2,7 +2,7 @@
 
 use Anomaly\ConfigurationModule\Configuration\Contract\ConfigurationRepositoryInterface;
 use Illuminate\Config\Repository;
-use Illuminate\Contracts\Bus\SelfHandling;
+
 
 /**
  * Class ConfigurationFormFields
@@ -10,9 +10,8 @@ use Illuminate\Contracts\Bus\SelfHandling;
  * @link          http://pyrocms.com/
  * @author        PyroCMS, Inc. <support@pyrocms.com>
  * @author        Ryan Thompson <ryan@pyrocms.com>
- * @package       Anomaly\ConfigurationModule\Configuration\Form
  */
-class ConfigurationFormFields implements SelfHandling
+class ConfigurationFormFields
 {
 
     /**
@@ -42,7 +41,7 @@ class ConfigurationFormFields implements SelfHandling
         $scope     = $builder->getScope();
         $namespace = $builder->getFormEntry() . '::';
 
-        /**
+        /*
          * Get the fields from the config system. Sections are
          * optionally defined the same way.
          */
@@ -54,12 +53,12 @@ class ConfigurationFormFields implements SelfHandling
             $builder->setSections($sections);
         }
 
-        /**
+        /*
          * Finish each field.
          */
         foreach ($fields as $slug => &$field) {
 
-            /**
+            /*
              * Force an array. This is done later
              * too in normalization but we need it now
              * because we are normalizing / guessing our
@@ -67,7 +66,7 @@ class ConfigurationFormFields implements SelfHandling
              */
             if (is_string($field)) {
                 $field = [
-                    'type' => $field
+                    'type' => $field,
                 ];
             }
 

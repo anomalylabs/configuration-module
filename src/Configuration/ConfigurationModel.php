@@ -14,7 +14,6 @@ use Anomaly\Streams\Platform\Model\Configuration\ConfigurationConfigurationEntry
  * @link          http://pyrocms.com/
  * @author        PyroCMS, Inc. <support@pyrocms.com>
  * @author        Ryan Thompson <ryan@pyrocms.com>
- * @package       Anomaly\ConfigurationModule\ConfigurationInterface
  */
 class ConfigurationModel extends ConfigurationConfigurationEntryModel implements ConfigurationInterface
 {

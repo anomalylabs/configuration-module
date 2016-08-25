@@ -2,6 +2,6 @@
 
 return [
     'section' => [
-        'configuration' => 'Configuration'
-    ]
+        'configuration' => 'Configuration',
+    ],
 ];

@@ -19,7 +19,7 @@ class AnomalyModuleConfigurationCreateConfigurationStream extends Migration
      */
     protected $stream = [
         'slug'   => 'configuration',
-        'locked' => true
+        'locked' => true,
     ];
 
     /**
@@ -29,12 +29,12 @@ class AnomalyModuleConfigurationCreateConfigurationStream extends Migration
      */
     protected $assignments = [
         'scope' => [
-            'required' => true
+            'required' => true,
         ],
         'key'   => [
-            'required' => true
+            'required' => true,
         ],
-        'value'
+        'value',
     ];
 
 }
