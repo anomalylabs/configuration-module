@@ -1,5 +1,6 @@
 <?php namespace Anomaly\ConfigurationModule\Configuration\Contract;
 
+use Anomaly\Streams\Platform\Addon\FieldType\FieldType;
 use Anomaly\Streams\Platform\Addon\FieldType\FieldTypePresenter;
 use Anomaly\Streams\Platform\Entry\Contract\EntryInterface;
 
@@ -12,6 +13,13 @@ use Anomaly\Streams\Platform\Entry\Contract\EntryInterface;
  */
 interface ConfigurationInterface extends EntryInterface
 {
+
+    /**
+     * Return the value field.
+     *
+     * @return FieldType
+     */
+    public function field();
 
     /**
      * Get the key.
