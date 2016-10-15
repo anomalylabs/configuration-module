@@ -39,7 +39,7 @@ interface ConfigurationRepositoryInterface extends EntryRepositoryInterface
      * @param                          $key
      * @param                          $scope
      * @param  null                    $default
-     * @return FieldTypePresenter|null
+     * @return mixed|null
      */
     public function value($key, $scope, $default = null);
 

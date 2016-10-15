@@ -1,5 +1,6 @@
 <?php namespace Anomaly\ConfigurationModule\Configuration\Contract;
 
+use Anomaly\Streams\Platform\Addon\FieldType\FieldTypePresenter;
 use Anomaly\Streams\Platform\Entry\Contract\EntryInterface;
 
 /**
@@ -56,4 +57,16 @@ interface ConfigurationInterface extends EntryInterface
      * @return $this
      */
     public function setValue($value);
+
+    /**
+     * Get the field type's presenter
+     * for a given field slug.
+     *
+     * We're overriding this to catch
+     * the "value" key.
+     *
+     * @param $fieldSlug
+     * @return FieldTypePresenter
+     */
+    public function getFieldTypePresenter($fieldSlug);
 }

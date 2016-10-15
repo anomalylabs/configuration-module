@@ -19,11 +19,21 @@ class ConfigurationModel extends ConfigurationConfigurationEntryModel implements
 {
 
     /**
-     * The cache minutes.
+     * Return the value field.
      *
-     * @var int
+     * @return FieldType
      */
-    protected $cacheMinutes = 99999;
+    public function field()
+    {
+        /* @var FieldType $field */
+        $field = $this->dispatch(new GetValueFieldType($this));
+
+        if (!$field) {
+            return null;
+        }
+
+        return $field;
+    }
 
     /**
      * Get the key.
@@ -114,14 +124,11 @@ class ConfigurationModel extends ConfigurationConfigurationEntryModel implements
      */
     protected function getValueAttribute()
     {
-        /* @var FieldType $type */
-        $type = $this->dispatch(new GetValueFieldType($this));
-
-        if (!$type) {
-            return $this->attributes['value'];
+        if (!$field = $this->field()) {
+            return null;
         }
 
-        return $type->getValue();
+        return $field->getValue();
     }
 
     /**
