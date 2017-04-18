@@ -1,7 +1,7 @@
 <?php namespace Anomaly\ConfigurationModule\Configuration\Form;
 
 use Anomaly\ConfigurationModule\Configuration\Contract\ConfigurationRepositoryInterface;
-use Illuminate\Config\Repository;
+use Illuminate\Contracts\Config\Repository;
 
 
 /**

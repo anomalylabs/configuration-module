@@ -4,7 +4,7 @@ use Anomaly\ConfigurationModule\Configuration\Contract\ConfigurationRepositoryIn
 use Anomaly\Streams\Platform\Addon\FieldType\FieldType;
 use Anomaly\Streams\Platform\Ui\Form\Contract\FormRepositoryInterface;
 use Anomaly\Streams\Platform\Ui\Form\FormBuilder;
-use Illuminate\Config\Repository;
+use Illuminate\Contracts\Config\Repository;
 use Illuminate\Container\Container;
 
 /**
