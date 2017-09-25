@@ -105,11 +105,16 @@ class ConfigurationFormFields
             }
 
             // Default the placeholder.
-            $field['config']['placeholder'] = array_get(
-                $field,
-                'placeholder',
-                $namespace . 'configuration.' . $slug . '.placeholder'
-            );
+            if (trans()->has(
+                $placeholder = array_get(
+                    $field,
+                    'placeholder',
+                    $namespace . 'configuration.' . $slug . '.placeholder'
+                )
+            )
+            ) {
+                $field['placeholder'] = $placeholder;
+            }
 
             // Default the instructions.
             if (trans()->has(
