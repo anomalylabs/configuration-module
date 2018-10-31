@@ -1,6 +1,7 @@
 <?php namespace Anomaly\ConfigurationModule\Configuration\Form;
 
 use Anomaly\ConfigurationModule\Configuration\Contract\ConfigurationRepositoryInterface;
+use Anomaly\Streams\Platform\Addon\FieldType\FieldTypeBuilder;
 use Illuminate\Contracts\Config\Repository;
 
 
@@ -36,8 +37,11 @@ class ConfigurationFormFields
      *
      * @param ConfigurationFormBuilder $builder
      */
-    public function handle(ConfigurationFormBuilder $builder, ConfigurationRepositoryInterface $configuration)
-    {
+    public function handle(
+        ConfigurationFormBuilder $builder,
+        FieldTypeBuilder $fieldTypes,
+        ConfigurationRepositoryInterface $configuration
+    ) {
         $scope     = $builder->getScope();
         $namespace = $builder->getFormEntry() . '::';
 
@@ -68,6 +72,29 @@ class ConfigurationFormFields
                 $field = [
                     'type' => $field,
                 ];
+            }
+
+            /**
+             * Try pre-populating the configuration
+             * from the field type if things are
+             * stashed there in the class.
+             */
+            $fieldType = $fieldTypes->build(['type' => $field['type']]);
+
+            if ($label = $fieldType->getLabel()) {
+                $field['label'] = $label;
+            }
+
+            if ($warning = $fieldType->getWarning()) {
+                $field['warning'] = $label;
+            }
+
+            if ($placeholder = $fieldType->getPlaceholder()) {
+                $field['placeholder'] = $label;
+            }
+
+            if ($instructions = $fieldType->getInstructions()) {
+                $field['instructions'] = $label;
             }
 
             // Make sure we have a config property.
