@@ -2,7 +2,7 @@
 
 use Anomaly\ConfigurationModule\Configuration\Contract\ConfigurationInterface;
 use Anomaly\Streams\Platform\Addon\FieldType\FieldType;
-use Anomaly\Streams\Platform\Addon\FieldType\FieldTypeCollection;
+use Anomaly\Streams\Platform\Addon\FieldType\FieldTypeBuilder;
 use Illuminate\Contracts\Config\Repository;
 
 /**
@@ -35,11 +35,11 @@ class GetValueFieldType
     /**
      * Handle the command.
      *
-     * @param  FieldTypeCollection $fieldTypes
-     * @param  Repository          $config
+     * @param  FieldTypeBuilder $fieldTypes
+     * @param  Repository $config
      * @return FieldType
      */
-    public function handle(FieldTypeCollection $fieldTypes, Repository $config)
+    public function handle(FieldTypeBuilder $fieldTypes, Repository $config)
     {
         // Get the configuration's key.
         $key = $this->configuration->getKey();
@@ -64,7 +64,7 @@ class GetValueFieldType
          * the configuration uses. If none exists
          * then just return the value as is.
          */
-        $type = $fieldTypes->get(array_get($field, 'type'));
+        $type = $fieldTypes->build($field);
 
         if (!$type) {
             return null;
