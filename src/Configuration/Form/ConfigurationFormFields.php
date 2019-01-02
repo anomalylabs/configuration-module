@@ -86,15 +86,15 @@ class ConfigurationFormFields
             }
 
             if ($warning = $fieldType->getWarning()) {
-                $field['warning'] = $label;
+                $field['warning'] = $warning;
             }
 
             if ($placeholder = $fieldType->getPlaceholder()) {
-                $field['placeholder'] = $label;
+                $field['placeholder'] = $placeholder;
             }
 
             if ($instructions = $fieldType->getInstructions()) {
-                $field['instructions'] = $label;
+                $field['instructions'] = $instructions;
             }
 
             // Make sure we have a config property.
