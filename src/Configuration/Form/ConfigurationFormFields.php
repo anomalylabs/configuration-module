@@ -81,19 +81,19 @@ class ConfigurationFormFields
              */
             $fieldType = $fieldTypes->build(['type' => $field['type']]);
 
-            if ($label = $fieldType->getLabel()) {
+            if ($label = array_get($field, 'label', $fieldType->getLabel())) {
                 $field['label'] = $label;
             }
 
-            if ($warning = $fieldType->getWarning()) {
+            if ($warning = array_get($field, 'warning', $fieldType->getWarning())) {
                 $field['warning'] = $warning;
             }
 
-            if ($placeholder = $fieldType->getPlaceholder()) {
+            if ($placeholder = array_get($field, 'placeholder', $fieldType->getPlaceholder())) {
                 $field['placeholder'] = $placeholder;
             }
 
-            if ($instructions = $fieldType->getInstructions()) {
+            if ($instructions = array_get($field, 'instructions', $fieldType->getInstructions())) {
                 $field['instructions'] = $instructions;
             }
 
