@@ -2,19 +2,16 @@
 
 use Anomaly\ConfigurationModule\Configuration\Contract\ConfigurationInterface;
 use Anomaly\Streams\Platform\Addon\FieldType\FieldType;
-use Illuminate\Foundation\Bus\DispatchesJobs;
 
 /**
  * Class ModifyValue
  *
- * @link          http://pyrocms.com/
- * @author        PyroCMS, Inc. <support@pyrocms.com>
- * @author        Ryan Thompson <ryan@pyrocms.com>
+ * @link   http://pyrocms.com/
+ * @author PyroCMS, Inc. <support@pyrocms.com>
+ * @author Ryan Thompson <ryan@pyrocms.com>
  */
 class ModifyValue
 {
-
-    use DispatchesJobs;
 
     /**
      * The configuration value.
@@ -36,7 +33,7 @@ class ModifyValue
      * @param ConfigurationInterface $configuration
      * @param                        $value
      */
-    function __construct(ConfigurationInterface $configuration, $value)
+    public function __construct(ConfigurationInterface $configuration, $value)
     {
         $this->value         = $value;
         $this->configuration = $configuration;
@@ -50,7 +47,7 @@ class ModifyValue
     public function handle()
     {
         /* @var FieldType $type */
-        if ($type = $this->dispatch(new GetValueFieldType($this->configuration))) {
+        if ($type = dispatch_now(new GetValueFieldType($this->configuration))) {
             return $type->getModifier()->modify($this->value);
         }
 

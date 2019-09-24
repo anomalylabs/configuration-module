@@ -20,5 +20,4 @@ class ConfigurationModuleServiceProvider extends AddonServiceProvider
     protected $singletons = [
         'Anomaly\ConfigurationModule\Configuration\Contract\ConfigurationRepositoryInterface' => 'Anomaly\ConfigurationModule\Configuration\ConfigurationRepository',
     ];
-
 }

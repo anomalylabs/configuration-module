@@ -19,5 +19,4 @@ class ConfigurationModule extends Module
      * @var bool
      */
     protected $navigation = false;
-
 }

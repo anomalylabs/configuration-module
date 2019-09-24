@@ -3,7 +3,7 @@
 use Anomaly\ConfigurationModule\Configuration\Contract\ConfigurationInterface;
 use Anomaly\Streams\Platform\Addon\FieldType\FieldType;
 use Anomaly\Streams\Platform\Addon\FieldType\FieldTypeBuilder;
-use Illuminate\Contracts\Config\Repository;
+
 
 /**
  * Class GetValueFieldType
@@ -48,8 +48,8 @@ class GetValueFieldType
         $value = array_get($this->configuration->getAttributes(), 'value');
 
         // Try and find the configuration's field configuration.
-        if (!$field = $config->get(str_replace('::', '::configuration/configuration.', $key))) {
-            $field = $config->get(str_replace('::', '::configuration.', $key));
+        if (!$field = config(str_replace('::', '::configuration/configuration.', $key))) {
+            $field = config(str_replace('::', '::configuration.', $key));
         }
 
         // Convert short syntax.

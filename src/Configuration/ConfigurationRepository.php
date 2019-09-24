@@ -5,7 +5,7 @@ use Anomaly\ConfigurationModule\Configuration\Contract\ConfigurationRepositoryIn
 use Anomaly\Streams\Platform\Addon\FieldType\FieldTypeCollection;
 use Anomaly\Streams\Platform\Addon\FieldType\FieldTypePresenter;
 use Anomaly\Streams\Platform\Entry\EntryRepository;
-use Illuminate\Contracts\Config\Repository;
+
 
 /**
  * Class ConfigurationRepositoryInterface
@@ -34,8 +34,8 @@ class ConfigurationRepository extends EntryRepository implements ConfigurationRe
     /**
      * Create a new ConfigurationRepositoryInterface instance.
      *
-     * @param ConfigurationModel  $model
-     * @param Repository          $config
+     * @param ConfigurationModel $model
+     * @param Repository $config
      * @param FieldTypeCollection $fieldTypes
      */
     public function __construct(ConfigurationModel $model)
@@ -43,18 +43,6 @@ class ConfigurationRepository extends EntryRepository implements ConfigurationRe
         $this->model = $model;
 
         $this->configurations = $this->model->all();
-    }
-
-    /**
-     * Get a configuration.
-     *
-     * @param $key
-     * @param $scope
-     * @return ConfigurationInterface|null
-     */
-    public function get($key, $scope)
-    {
-        return $this->configurations->get($key . $scope);
     }
 
     /**
@@ -75,11 +63,31 @@ class ConfigurationRepository extends EntryRepository implements ConfigurationRe
     }
 
     /**
+     * Find a configuration by it's key
+     * or return a new instance.
+     *
+     * @param $key
+     * @param $scope
+     * @return ConfigurationInterface
+     */
+    public function findByKeyAndScopeOrNew($key, $scope)
+    {
+        if (!$configuration = $this->model->where('key', $key)->where('scope', $scope)->first()) {
+            $configuration = $this->model->newInstance();
+
+            $configuration->setKey($key);
+            $configuration->setScope($scope);
+        }
+
+        return $configuration;
+    }
+
+    /**
      * Get a configuration value.
      *
      * @param             $key
      * @param             $scope
-     * @param  null       $default
+     * @param  null $default
      * @return mixed|null
      */
     public function value($key, $scope, $default = null)
@@ -89,6 +97,18 @@ class ConfigurationRepository extends EntryRepository implements ConfigurationRe
         }
 
         return $default;
+    }
+
+    /**
+     * Get a configuration.
+     *
+     * @param $key
+     * @param $scope
+     * @return ConfigurationInterface|null
+     */
+    public function get($key, $scope)
+    {
+        return $this->configurations->get($key . $scope);
     }
 
     /**
@@ -105,27 +125,6 @@ class ConfigurationRepository extends EntryRepository implements ConfigurationRe
         }
 
         return null;
-    }
-
-    /**
-     * Find a configuration by it's key
-     * or return a new instance.
-     *
-     * @param $key
-     * @param $scope
-     * @return ConfigurationInterface
-     */
-    public function findByKeyAndScopeOrNew($key, $scope)
-    {
-        if (!$configuration = $this->model->where('key', $key)->where('scope', $scope)->first()) {
-
-            $configuration = $this->model->newInstance();
-
-            $configuration->setKey($key);
-            $configuration->setScope($scope);
-        }
-
-        return $configuration;
     }
 
     /**

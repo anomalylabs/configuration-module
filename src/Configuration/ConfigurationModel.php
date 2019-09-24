@@ -19,23 +19,6 @@ class ConfigurationModel extends ConfigurationConfigurationEntryModel implements
 {
 
     /**
-     * Return the value field.
-     *
-     * @return FieldType
-     */
-    public function field()
-    {
-        /* @var FieldType $field */
-        $field = $this->dispatch(new GetValueFieldType($this));
-
-        if (!$field) {
-            return null;
-        }
-
-        return $field;
-    }
-
-    /**
      * Get the key.
      *
      * @return string
@@ -105,6 +88,25 @@ class ConfigurationModel extends ConfigurationConfigurationEntryModel implements
     }
 
     /**
+     * Get the field type's presenter
+     * for a given field slug.
+     *
+     * We're overriding this to catch
+     * the "value" key.
+     *
+     * @param $fieldSlug
+     * @return FieldTypePresenter
+     */
+    public function getFieldTypePresenter($fieldSlug)
+    {
+        if ($fieldSlug == 'value') {
+            return dispatch_now(new GetValuePresenter($this));
+        }
+
+        return parent::getFieldTypePresenter($fieldSlug);
+    }
+
+    /**
      * Set the value.
      *
      * @param $value
@@ -112,7 +114,7 @@ class ConfigurationModel extends ConfigurationConfigurationEntryModel implements
      */
     protected function setValueAttribute($value)
     {
-        $this->attributes['value'] = $this->dispatch(new ModifyValue($this, $value));
+        $this->attributes['value'] = dispatch_now(new ModifyValue($this, $value));
 
         return $this;
     }
@@ -132,21 +134,19 @@ class ConfigurationModel extends ConfigurationConfigurationEntryModel implements
     }
 
     /**
-     * Get the field type's presenter
-     * for a given field slug.
+     * Return the value field.
      *
-     * We're overriding this to catch
-     * the "value" key.
-     *
-     * @param $fieldSlug
-     * @return FieldTypePresenter
+     * @return FieldType
      */
-    public function getFieldTypePresenter($fieldSlug)
+    public function field()
     {
-        if ($fieldSlug == 'value') {
-            return $this->dispatch(new GetValuePresenter($this));
+        /* @var FieldType $field */
+        $field = dispatch_now(new GetValueFieldType($this));
+
+        if (!$field) {
+            return null;
         }
 
-        return parent::getFieldTypePresenter($fieldSlug);
+        return $field;
     }
 }

@@ -2,35 +2,16 @@
 
 use Anomaly\ConfigurationModule\Configuration\Contract\ConfigurationRepositoryInterface;
 use Anomaly\Streams\Platform\Addon\FieldType\FieldTypeBuilder;
-use Illuminate\Contracts\Config\Repository;
-
 
 /**
  * Class ConfigurationFormFields
  *
- * @link          http://pyrocms.com/
- * @author        PyroCMS, Inc. <support@pyrocms.com>
- * @author        Ryan Thompson <ryan@pyrocms.com>
+ * @link   http://pyrocms.com/
+ * @author PyroCMS, Inc. <support@pyrocms.com>
+ * @author Ryan Thompson <ryan@pyrocms.com>
  */
 class ConfigurationFormFields
 {
-
-    /**
-     * The config repository.
-     *
-     * @var Repository
-     */
-    protected $config;
-
-    /**
-     * Create a new ConfigurationFormFields instance.
-     *
-     * @param Repository $config
-     */
-    public function __construct(Repository $config)
-    {
-        $this->config = $config;
-    }
 
     /**
      * Return the form fields.
@@ -49,11 +30,11 @@ class ConfigurationFormFields
          * Get the fields from the config system. Sections are
          * optionally defined the same way.
          */
-        if (!$fields = $this->config->get($namespace . 'configuration/configuration')) {
-            $fields = $fields = $this->config->get($namespace . 'configuration', []);
+        if (!$fields = config($namespace . 'configuration/configuration')) {
+            $fields = $fields = config($namespace . 'configuration', []);
         }
 
-        if ($sections = $this->config->get($namespace . 'configuration/sections')) {
+        if ($sections = config($namespace . 'configuration/sections')) {
             $builder->setSections($sections);
         }
 

@@ -2,7 +2,7 @@
 
 use Anomaly\ConfigurationModule\Configuration\Contract\ConfigurationInterface;
 use Anomaly\Streams\Platform\Addon\FieldType\FieldType;
-use Illuminate\Contracts\Config\Repository;
+
 use Illuminate\Foundation\Bus\DispatchesJobs;
 
 /**
@@ -15,7 +15,7 @@ use Illuminate\Foundation\Bus\DispatchesJobs;
 class GetValuePresenter
 {
 
-    use DispatchesJobs;
+
 
     /**
      * The configuration instance.
@@ -42,7 +42,7 @@ class GetValuePresenter
     public function handle()
     {
         /* @var FieldType $type */
-        if ($type = $this->dispatch(new GetValueFieldType($this->configuration))) {
+        if ($type = dispatch_now(new GetValueFieldType($this->configuration))) {
             return $type->getPresenter();
         }
 

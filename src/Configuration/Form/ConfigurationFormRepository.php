@@ -4,32 +4,16 @@ use Anomaly\ConfigurationModule\Configuration\Contract\ConfigurationRepositoryIn
 use Anomaly\Streams\Platform\Addon\FieldType\FieldType;
 use Anomaly\Streams\Platform\Ui\Form\Contract\FormRepositoryInterface;
 use Anomaly\Streams\Platform\Ui\Form\FormBuilder;
-use Illuminate\Contracts\Config\Repository;
-use Illuminate\Container\Container;
 
 /**
- * Class ConfigurationFormRepositoryInterface
+ * Class ConfigurationFormRepository
  *
- * @link          http://pyrocms.com/
- * @author        PyroCMS, Inc. <support@pyrocms.com>
- * @author        Ryan Thompson <ryan@pyrocms.com>
+ * @link   http://pyrocms.com/
+ * @author PyroCMS, Inc. <support@pyrocms.com>
+ * @author Ryan Thompson <ryan@pyrocms.com>
  */
 class ConfigurationFormRepository implements FormRepositoryInterface
 {
-
-    /**
-     * The config repository.
-     *
-     * @var Repository
-     */
-    protected $config;
-
-    /**
-     * The application container.
-     *
-     * @var Container
-     */
-    protected $container;
 
     /**
      * The configurations repository.
@@ -41,18 +25,11 @@ class ConfigurationFormRepository implements FormRepositoryInterface
     /**
      * Create a new ConfigurationFormRepositoryInterface instance.
      *
-     * @param Repository                       $config
-     * @param Container                        $container
      * @param ConfigurationRepositoryInterface $configurations
      */
-    public function __construct(
-        Repository $config,
-        Container $container,
-        ConfigurationRepositoryInterface $configurations
-    ) {
-        $this->config         = $config;
+    public function __construct(ConfigurationRepositoryInterface $configurations)
+    {
         $this->configurations = $configurations;
-        $this->container      = $container;
     }
 
     /**
@@ -78,12 +55,13 @@ class ConfigurationFormRepository implements FormRepositoryInterface
 
         /* @var FieldType $field */
         foreach ($builder->getFormFields() as $field) {
-
             $scope = $builder->getScope();
             $key   = $namespace . $field->getField();
             $value = $builder->getFormValue($field->getInputName());
 
             $this->configurations->set($key, $scope, $value);
         }
+
+        return true;
     }
 }
