@@ -26,7 +26,7 @@ class ConfigurationModel extends ConfigurationConfigurationEntryModel implements
     public function field()
     {
         /* @var FieldType $field */
-        $field = $this->dispatch(new GetValueFieldType($this));
+        $field = dispatch_sync(new GetValueFieldType($this));
 
         if (!$field) {
             return null;
@@ -112,7 +112,7 @@ class ConfigurationModel extends ConfigurationConfigurationEntryModel implements
      */
     protected function setValueAttribute($value)
     {
-        $this->attributes['value'] = $this->dispatch(new ModifyValue($this, $value));
+        $this->attributes['value'] = dispatch_sync(new ModifyValue($this, $value));
 
         return $this;
     }
@@ -144,7 +144,7 @@ class ConfigurationModel extends ConfigurationConfigurationEntryModel implements
     public function getFieldTypePresenter($fieldSlug)
     {
         if ($fieldSlug == 'value') {
-            return $this->dispatch(new GetValuePresenter($this));
+            return dispatch_sync(new GetValuePresenter($this));
         }
 
         return parent::getFieldTypePresenter($fieldSlug);
